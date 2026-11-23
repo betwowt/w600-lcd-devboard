@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "LCSC")(type "KiCad")(uri "${KIPRJMOD}/LCSC/LCSC.pretty")(options "")(descr "LCSC project components"))
+)

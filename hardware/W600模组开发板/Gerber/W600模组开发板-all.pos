@@ -1,0 +1,57 @@
+### Footprint positions - created on 2026-11-22T16:41:37 ###
+### Printed by KiCad version 10.0.6
+## Unit = mm, Angle = deg.
+## Side : All
+# Ref     Val                          Package                                                       PosX       PosY       Rot  Side
+C1        100nf                        C_0603_1608Metric                                          31.5976   -20.0660   90.0000  top
+C2        100nf                        C_0603_1608Metric                                          12.1666   -26.2218  180.0000  top
+C3        10uf                         C_0805_2012Metric                                          10.8966   -28.7872  -90.0000  top
+C4        100nf                        C_0603_1608Metric                                          12.7000   -28.9650  -90.0000  top
+C5        100nf                        C_0603_1608Metric                                          18.6566   -22.9046    0.0000  top
+C6        100nf                        C_0603_1608Metric                                          18.6436   -24.4856    0.0000  top
+C7        100nf                        C_0603_1608Metric                                          21.1836   -32.6350   90.0000  top
+C8        100nf                        C_0603_1608Metric                                          19.6608   -18.7115  -90.0000  top
+C9        10uf                         C_0805_2012Metric                                          23.0124   -32.4448   90.0000  top
+C10       100nf                        C_0603_1608Metric                                          29.8196   -20.0660   90.0000  top
+C11       100nf                        C_0603_1608Metric                                          27.9024   -23.0720  180.0000  top
+Card1     TF_PUSH                      C393941_TF-SMD_TF-PUSH                                     18.4924   -10.7950  180.0000  top
+D1        LED                          LED_0603_1608Metric                                         6.9342   -19.2024  -90.0000  top
+FID1      Fiducial                     Fiducial_0.5mm_Mask1mm                                      9.4488   -32.9438    0.0000  top
+FID2      Fiducial                     Fiducial_0.5mm_Mask1mm                                      8.2804    -4.0640    0.0000  top
+FID3      Fiducial                     Fiducial_0.5mm_Mask1mm                                     39.0398   -33.0454    0.0000  top
+FPC1      FPC-05F-16PH20               C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20                  41.1788   -27.7368   90.0000  top
+J1        USB_C_Receptacle_USB2.0_16P  USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal     4.2058   -26.2184  -90.0000  top
+LED1      XL-1615RGBC-RF               C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF       10.4394   -18.1420  -90.0000  top
+R1        10k                          R_0603_1608Metric                                          33.1724   -20.0660   90.0000  top
+R2        5.1k                         R_0603_1608Metric                                           7.0866   -32.5684    0.0000  top
+R3        5.1k                         R_0603_1608Metric                                           3.8354   -32.5938    0.0000  top
+R4        1k                           R_0603_1608Metric                                          13.3990   -18.9738  180.0000  top
+R5        10k                          R_0603_1608Metric                                           8.4582   -19.2023  -90.0000  top
+R6        10k                          R_0603_1608Metric                                          27.5012   -32.6014   90.0000  top
+R7        10k                          R_0603_1608Metric                                          29.1130   -32.6014   90.0000  top
+R8        10k                          R_0603_1608Metric                                          30.6878   -32.6014   90.0000  top
+R9        10k                          R_0603_1608Metric                                          32.2626   -32.6014   90.0000  top
+R10       1k                           R_0603_1608Metric                                          13.3990   -17.4498  180.0000  top
+R11       1k                           R_0603_1608Metric                                           4.4196   -19.7612  180.0000  top
+R12       47k                          R_0603_1608Metric                                          16.5874   -18.7237   90.0000  top
+R13       47k                          R_0603_1608Metric                                          18.1114   -18.7237   90.0000  top
+R14       47k                          R_0603_1608Metric                                          21.1848   -18.7237   90.0000  top
+R15       47k                          R_0603_1608Metric                                          22.7088   -18.7237   90.0000  top
+R16       10k                          R_0603_1608Metric                                          27.9024   -24.6380    0.0000  top
+R17       4.7k                         R_0603_1608Metric                                          27.9024   -26.2128    0.0000  top
+R18       4.7k                         R_0603_1608Metric                                          37.1602   -32.5750  -90.0000  top
+R19       4.7k                         R_0603_1608Metric                                          35.5138   -32.5750  -90.0000  top
+R20       4.7k                         R_0603_1608Metric                                          33.8882   -32.5750  -90.0000  top
+R21       4.7k                         R_0603_1608Metric                                          27.9024   -27.7876    0.0000  top
+R22       4.7k                         R_0603_1608Metric                                          27.9024   -29.3116    0.0000  top
+SW1       reset                        C720477_SW-SMD_L3.9-W3.0-P4.45                             27.1018   -19.4056   90.0000  top
+SW2       key0                         C720477_SW-SMD_L3.9-W3.0-P4.45                              2.0828   -10.0076   90.0000  top
+SW3       key1                         C720477_SW-SMD_L3.9-W3.0-P4.45                              5.1054    -4.5212   90.0000  top
+SW4       key2                         C720477_SW-SMD_L3.9-W3.0-P4.45                              5.1308   -15.1936   90.0000  top
+SW5       key3                         C720477_SW-SMD_L3.9-W3.0-P4.45                              8.1280   -10.0076   90.0000  top
+U1        W25Q64JWSSIQ_C2985658        C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL                    23.3467   -25.5106    0.0000  top
+U2        CH340N_C2977777              C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL                    13.0302   -22.7420  -90.0000  top
+U3        AMS1117-3.3                  C6186_SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR                   16.9418   -29.9466   90.0000  top
+U4        W600模组                       C19949064_WIRELM-SMD_ESP-12F                               36.6174    -9.5758    0.0000  top
+U5        XL9555                       C609791_TSSOP-24_L7.8-W4.4-P0.65-LS6.4-BL                  33.6042   -26.7970    0.0000  top
+## End

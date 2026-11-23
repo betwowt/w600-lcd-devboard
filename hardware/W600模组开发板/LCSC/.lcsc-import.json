@@ -1,0 +1,166 @@
+{
+  "owner": "lcsc-project-import-v2",
+  "library_name": "LCSC",
+  "components": {
+    "C19949064": {
+      "symbols": {
+        "C19949064_ESP-12F": "6cc71615b2f855fd6a75904bf5beb122626d829d58090e30a46b565025ad0b59"
+      },
+      "files": {
+        "LCSC.3dshapes/C19949064_WIRELM-SMD_ESP-12F.wrl": "d62362efd13c5883e7857e54ecfd49f8a37505591cabfa5257f8befcc975da37",
+        "LCSC.3dshapes/C19949064_WIRELM-SMD_ESP-12F.step": "3e5b3cc1f4f18533caceeda62021b365ce0a7140031438e2c35f93c1a201e217",
+        "LCSC.pretty/C19949064_WIRELM-SMD_ESP-12F.kicad_mod": "5797434fc972fd71e9880f7e6ddfc6cf95826a5fc7b290864a87e0c6b9c5f852"
+      },
+      "footprint": "LCSC.pretty/C19949064_WIRELM-SMD_ESP-12F.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C19949064_WIRELM-SMD_ESP-12F.step",
+        "LCSC.3dshapes/C19949064_WIRELM-SMD_ESP-12F.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C6186": {
+      "symbols": {
+        "C6186_AMS1117-3.3": "9ed695bae57746847697d0e2d9bfc2123da439e566d7e6bba3f103320a575828"
+      },
+      "files": {
+        "LCSC.3dshapes/C6186_SOT-223-4P_L6.5-W3.5-H1.6-LS7.0-P2.30.wrl": "416e1d9b90c52720060854817a05e0c5867f735007b1315831431e649cd920f9",
+        "LCSC.3dshapes/C6186_SOT-223-4P_L6.5-W3.5-H1.6-LS7.0-P2.30.step": "626f754b8234c4be995185bb4b6227759060a36e52c567a0dae6a2f3182eb889",
+        "LCSC.pretty/C6186_SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR.kicad_mod": "4c4d2019abc827407bdc4953d272682baf900bd64218e9f3c375569ce313603a"
+      },
+      "footprint": "LCSC.pretty/C6186_SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C6186_SOT-223-4P_L6.5-W3.5-H1.6-LS7.0-P2.30.step",
+        "LCSC.3dshapes/C6186_SOT-223-4P_L6.5-W3.5-H1.6-LS7.0-P2.30.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C2977777": {
+      "symbols": {
+        "C2977777_CH340N_C2977777": "5fe6f302d6323caf474eb96468dd1be5097a934109e7335185f9b0fdb65c0e59"
+      },
+      "files": {
+        "LCSC.3dshapes/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL-1.wrl": "680979f5eece787443e5dcaac3288824b416851ccaf9fb6beca9165500666f81",
+        "LCSC.3dshapes/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL-1.step": "d884c2b3aaea7f93dde52659d3b88cce8b014086c464e36fddcea84c6080f51c",
+        "LCSC.pretty/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL.kicad_mod": "491af9e4ce4d009ad6a64a14a245fd22dd5278398ec3b385d02facbed2df6e45"
+      },
+      "footprint": "LCSC.pretty/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL-1.step",
+        "LCSC.3dshapes/C2977777_SOP-8_L4.9-W3.9-P1.27-LS6.0-BL-1.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C720477": {
+      "symbols": {
+        "C720477_TS-1088-AR02016": "d4d4c8b46c870ede46153adc53c18ff55436ae291b0be07f9354224733d2b3ae"
+      },
+      "files": {
+        "LCSC.3dshapes/C720477_SW-SMD_L3.9-W2.9-H2.0-LS4.8.wrl": "4c22907cd5851081e95af0ff70924639fe8866da6ab42f6b7b86083191506bc5",
+        "LCSC.3dshapes/C720477_SW-SMD_L3.9-W2.9-H2.0-LS4.8.step": "eb1d8f55ed502394dd05cbe1efb749c3b0e2a43bfefaf227875d38008fbef7ab",
+        "LCSC.pretty/C720477_SW-SMD_L3.9-W3.0-P4.45.kicad_mod": "3eb281ec56d9a49a4428d18e393c3b44e3031e4301903762ce1a2c8a0848e127"
+      },
+      "footprint": "LCSC.pretty/C720477_SW-SMD_L3.9-W3.0-P4.45.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C720477_SW-SMD_L3.9-W2.9-H2.0-LS4.8.step",
+        "LCSC.3dshapes/C720477_SW-SMD_L3.9-W2.9-H2.0-LS4.8.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C393941": {
+      "symbols": {
+        "C393941_TFPUSH": "0220a62a5b22c4668a2fc6695f359e4e518462ad32708b72634d4681b19fb3b8"
+      },
+      "files": {
+        "LCSC.3dshapes/C393941_TF-SMD_TF-PUSH.wrl": "a8431fdc463a82546a784c0db0df322ea328e6c2c7a1dcc5addfb2d0780553a1",
+        "LCSC.3dshapes/C393941_TF-SMD_TF-PUSH.step": "9047d3f8bab266e27f28ed204b455a20dbca70e9fc3b4359e80d2b621671425f",
+        "LCSC.pretty/C393941_TF-SMD_TF-PUSH.kicad_mod": "9c06f5be076277af32832367a898776d208d75fe2624b989cb90d23d86166806"
+      },
+      "footprint": "LCSC.pretty/C393941_TF-SMD_TF-PUSH.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C393941_TF-SMD_TF-PUSH.step",
+        "LCSC.3dshapes/C393941_TF-SMD_TF-PUSH.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C2856801": {
+      "symbols": {
+        "C2856801_FPC-05F-16PH20": "b6b03101e450c8701f9d3e7fafe1866d5850c23c7b49e7990280ca5b13b5d3cb"
+      },
+      "files": {
+        "LCSC.3dshapes/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.wrl": "e70be492c637858619e4a32be5dcfba294c186858dccf78c7ebb2850618d672e",
+        "LCSC.3dshapes/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.step": "cbcc08932391dd562297398cb20bc7047f297b66c79174f838dcb891207f69ac",
+        "LCSC.pretty/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.kicad_mod": "bfacd634781f5dbb1962f26a905333373267dca8850e3a64a569fccbd487eb43"
+      },
+      "footprint": "LCSC.pretty/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.step",
+        "LCSC.3dshapes/C2856801_FPC-SMD_16P-P0.50_FPC-05F-16PH20.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C148077": {
+      "symbols": {
+        "C148077_AW9523BTQR": "c2313ae3e22629c26f1ab87290a08d04de640b2a8c98643baa7a4ff7607d304e"
+      },
+      "files": {
+        "LCSC.3dshapes/C148077_VFQFPN-24_L4.0-W4.0-H0.9-P0.50.wrl": "b75d23a35e06d8bf4392b53f7e33082bb69eb7b4c13da5e316e467540a98bb53",
+        "LCSC.3dshapes/C148077_VFQFPN-24_L4.0-W4.0-H0.9-P0.50.step": "9445f04038ba3da5ce1a793371b42350ae8535287413c13a9c8a7b6e754e7530",
+        "LCSC.pretty/C148077_VFQFPN-24_L4.0-W4.0-P0.50-BL-EP2.8.kicad_mod": "d888cc7722e120d81351f530aee742bb03ec32cb4f8feb389ed3bdf95f42eee4"
+      },
+      "footprint": "LCSC.pretty/C148077_VFQFPN-24_L4.0-W4.0-P0.50-BL-EP2.8.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C148077_VFQFPN-24_L4.0-W4.0-H0.9-P0.50.step",
+        "LCSC.3dshapes/C148077_VFQFPN-24_L4.0-W4.0-H0.9-P0.50.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C609791": {
+      "symbols": {
+        "C609791_XL9555": "a495ea69105dbf57d36bf91e667b50bd190090fe1bb22622f77b20c124880120"
+      },
+      "files": {
+        "LCSC.3dshapes/C609791_TSSOP-24_L7.8-W4.4-H1.0-LS6.4-P0.65.wrl": "90845341f6b412f4ad361bdc04649c3c76676b3350eb3d9fe8573a0fc6f309cb",
+        "LCSC.3dshapes/C609791_TSSOP-24_L7.8-W4.4-H1.0-LS6.4-P0.65.step": "696ed4df071ff20fce3b951423c783f4e0abcca3b61550c8da872baec990982e",
+        "LCSC.pretty/C609791_TSSOP-24_L7.8-W4.4-P0.65-LS6.4-BL.kicad_mod": "780c7423bcc9aa9c8adb8e751177aaf5caf69c058c21983519bc2f97d20807b4"
+      },
+      "footprint": "LCSC.pretty/C609791_TSSOP-24_L7.8-W4.4-P0.65-LS6.4-BL.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C609791_TSSOP-24_L7.8-W4.4-H1.0-LS6.4-P0.65.step",
+        "LCSC.3dshapes/C609791_TSSOP-24_L7.8-W4.4-H1.0-LS6.4-P0.65.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C965840": {
+      "symbols": {
+        "C965840_XL-1615RGBC-RF": "7612ca0a4f8a0bdbfb2e9b6fe2bcf8240347462bb8f42bc532edad225a83b779"
+      },
+      "files": {
+        "LCSC.3dshapes/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.wrl": "e086e83f3fc9fd478811c872e4a3fd21de024e281bac3b6073e9b850d1c629dc",
+        "LCSC.3dshapes/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.step": "aec1c5c876adc90108d2c2b6f8cc0e8f0922fca376a6fbc839691ddf1a668779",
+        "LCSC.pretty/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.kicad_mod": "d3dbc8821e024bdd594caaf16a5f6017559e8a620ac7c3a9695ff4c2c19b509d"
+      },
+      "footprint": "LCSC.pretty/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.step",
+        "LCSC.3dshapes/C965840_LED-ARRAY-SMD_4P-L1.6-W1.5-BR_XL-1615RGBC-RF.wrl"
+      ],
+      "model_status": "available"
+    },
+    "C2985658": {
+      "symbols": {
+        "C2985658_W25Q64JWSSIQ_C2985658": "7641c065ff7e0b8458ccd74f0db0e29df228c86865503d8e6ee838db3bd310ec"
+      },
+      "files": {
+        "LCSC.3dshapes/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.wrl": "169999d49395d4744ac1d423cdde05a6a4d23e8ac0c8cbe8efd175ba1209bcc6",
+        "LCSC.3dshapes/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.step": "72a3bad37eb76abc214f197cc615d531fcebb6d740a0a1f8f47531cb8d7dbca5",
+        "LCSC.pretty/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.kicad_mod": "9fee71dee3619387a8567b27e236ce77babee936153efbb9ae18733726adfc87"
+      },
+      "footprint": "LCSC.pretty/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.kicad_mod",
+      "models": [
+        "LCSC.3dshapes/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.step",
+        "LCSC.3dshapes/C2985658_SOP-8_L5.3-W5.2-P1.27-LS7.9-BL.wrl"
+      ],
+      "model_status": "available"
+    }
+  }
+}

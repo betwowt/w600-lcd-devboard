@@ -1,0 +1,11 @@
+# ESP32-C3 AT 固件主分区表，2MB flash 版本（官方 4MB 布局裁剪）
+# 与官方差异：ota_0 截断到 0x60000..0x200000（0x1a0000），删除 ota_1
+# at_customize 保持 0x1e000/0x42000 不变：at_customize.bin 内部是绝对偏移
+# （mfg_nvs@0x1f000, fatfs@0x47000），基址不可移动。
+# 代价：没有 ota_1，AT+CIUPDATE / OTA 升级不可用。
+# Name,Type,SubType,Offset,Size
+otadata,data,ota,0xd000,0x2000
+phy_init,data,phy,0xf000,0x1000
+nvs,data,nvs,0x10000,0xe000
+at_customize,0x40,0,0x1e000,0x42000
+ota_0,app,ota_0,0x60000,0x1a0000

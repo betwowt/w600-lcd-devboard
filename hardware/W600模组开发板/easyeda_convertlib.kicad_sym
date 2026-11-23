@@ -1,0 +1,361 @@
+(kicad_symbol_lib
+  (version 20211014)
+  (generator EasyKiConverter)
+  (symbol "ESP-12F"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "U"
+      (id 0)
+      (at 0.00 1.27 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Value"
+      "ESP-12F"
+      (id 1)
+      (at 0.00 -1.27 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Footprint"
+      "easyeda_convertlib:WIRELM-SMD_ESP-12F"
+      (id 2)
+      (at 0.00 -17.78 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C19949064"
+      (id 5)
+      (at 0.00 -20.32 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "ki_description"
+      "ESP-12F"
+      (id 6)
+      (at 0.00 -22.86 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (rectangle
+      (start -8.89 15.24)
+      (end 8.89 -15.24)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (circle
+      (center -7.62 13.97)
+      (radius 0.38)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (pin unspecified line
+      (at -11.43 12.70 0)
+      (length 2.54)
+      (name "RST" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "1" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 10.16 0)
+      (length 2.54)
+      (name "ADC" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "2" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 7.62 0)
+      (length 2.54)
+      (name "EN" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "3" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 5.08 0)
+      (length 2.54)
+      (name "IO16" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "4" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 2.54 0)
+      (length 2.54)
+      (name "IO14" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "5" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 0.00 0)
+      (length 2.54)
+      (name "IO12" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "6" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -2.54 0)
+      (length 2.54)
+      (name "IO13" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "7" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -5.08 0)
+      (length 2.54)
+      (name "VCC" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "8" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -7.62 0)
+      (length 2.54)
+      (name "CS0" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "9" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -10.16 0)
+      (length 2.54)
+      (name "MISO" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "10" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -12.70 0)
+      (length 2.54)
+      (name "IO9" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "11" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 -12.70 180)
+      (length 2.54)
+      (name "IO10" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "12" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 -10.16 180)
+      (length 2.54)
+      (name "MOSI" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "13" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 -7.62 180)
+      (length 2.54)
+      (name "SCLK" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "14" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 -5.08 180)
+      (length 2.54)
+      (name "GND" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "15" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 -2.54 180)
+      (length 2.54)
+      (name "IO15" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "16" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 0.00 180)
+      (length 2.54)
+      (name "IO2" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "17" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 2.54 180)
+      (length 2.54)
+      (name "IO0" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "18" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 5.08 180)
+      (length 2.54)
+      (name "IO4" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "19" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 7.62 180)
+      (length 2.54)
+      (name "IO5" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "20" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 10.16 180)
+      (length 2.54)
+      (name "RXD" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "21" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 12.70 180)
+      (length 2.54)
+      (name "TXD" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "22" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+  )
+  (symbol "AMS1117-3.3"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "U"
+      (id 0)
+      (at 0.00 1.27 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Value"
+      "AMS1117-3.3"
+      (id 1)
+      (at 0.00 -1.27 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Footprint"
+      "easyeda_convertlib:SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR"
+      (id 2)
+      (at 0.00 -7.62 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C6186"
+      (id 5)
+      (at 0.00 -10.16 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "ki_description"
+      "AMS1117-3.3"
+      (id 6)
+      (at 0.00 -12.70 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (rectangle
+      (start -8.89 5.08)
+      (end 8.89 -5.08)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (circle
+      (center -7.62 3.81)
+      (radius 0.38)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (pin unspecified line
+      (at -11.43 2.54 0)
+      (length 2.54)
+      (name "GND" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "1" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 0.00 0)
+      (length 2.54)
+      (name "VOUT" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "2" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -11.43 -2.54 0)
+      (length 2.54)
+      (name "VIN" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "3" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 11.43 0.00 180)
+      (length 2.54)
+      (name "VOUT" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "4" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+  )
+  (symbol "CH340N_C2977777"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "U"
+      (id 0)
+      (at 0.00 2.54 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Value"
+      "CH340N_C2977777"
+      (id 1)
+      (at 0.00 0.00 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) )
+    )
+    (property
+      "Footprint"
+      "easyeda_convertlib:SOP-8_L4.9-W3.9-P1.27-LS6.0-BL"
+      (id 2)
+      (at 0.00 -7.62 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C2977777"
+      (id 5)
+      (at 0.00 -10.16 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (property
+      "ki_description"
+      "CH340N_C2977777"
+      (id 6)
+      (at 0.00 -12.70 0)
+      (effects (font (size 1.27 1.27) (thickness 0) ) hide)
+    )
+    (rectangle
+      (start -7.62 7.62)
+      (end 7.62 -5.08)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (circle
+      (center -6.35 6.35)
+      (radius 0.38)
+      (stroke (width 0.254) (type default))
+      (fill (type none))
+    )
+    (pin unspecified line
+      (at 10.16 5.08 180)
+      (length 2.54)
+      (name "V3" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "8" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 10.16 2.54 180)
+      (length 2.54)
+      (name "RXD" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "7" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 10.16 0.00 180)
+      (length 2.54)
+      (name "TXD" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "6" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at 10.16 -2.54 180)
+      (length 2.54)
+      (name "VCC" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "5" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -10.16 -2.54 0)
+      (length 2.54)
+      (name "RTS#" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "4" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -10.16 0.00 0)
+      (length 2.54)
+      (name "GND" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "3" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -10.16 2.54 0)
+      (length 2.54)
+      (name "UD-" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "2" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+    (pin unspecified line
+      (at -10.16 5.08 0)
+      (length 2.54)
+      (name "UD+" (effects (font (size 1.27 1.27) (thickness 0) )))
+      (number "1" (effects (font (size 1.27 1.27) (thickness 0) )))
+    )
+  )
+)
