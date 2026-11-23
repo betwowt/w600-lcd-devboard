@@ -4,6 +4,7 @@ __pycache__/
 .tmp/
 results/
 **/.history/
+logo.bin
 
 software/lcd/user/.output/
 software/build-lcd.ps1.tmp

@@ -17,7 +17,7 @@ software/prebuilt/        当前源码的预编译镜像
 scripts/                  W600 AT 模块的串口/性能/长跑脚本
 tools/                    ESP-AT 下载辅助脚本
 docs/W600-AT-baseline.md  早期 W600 AT 模块实测与基线记录
-logo.bin                  开机图片（也可放 TF 卡 /logo.bin）
+logo.bin                  本地开机图片素材，不进入仓库
 ```
 
 `firmware/`（ESP32-C3 AT 原始固件包）、`build/`、`results/` 和 `.tmp/` 是本地
