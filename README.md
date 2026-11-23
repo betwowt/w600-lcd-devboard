@@ -7,8 +7,6 @@ W600（WinnerMicro）模组开发板 + ILI9341 240x320 SPI 屏的点屏、触摸
   <img src="docs/images/board.jpg" alt="W600 LCD DevBoard" width="420">
 </p>
 
-建议仓库名：**`w600-lcd-devboard`**。
-
 ## 目录
 
 ```text
