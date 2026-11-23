@@ -15,7 +15,7 @@ software/lcd/             W600 SDK 应用源码（LCD / XL9555 / Flash / SD / �
 software/build-lcd.ps1    把源码复制进 W600 SDK 并编译
 software/prebuilt/        当前源码的预编译镜像
 scripts/                  W600 AT 模块的串口/性能/长跑脚本
-tools/                    ESP-AT 下载辅助脚本
+tools/                    ESP-AT 下载辅助脚本、Bad Apple 视频转换脚本
 docs/W600-AT-baseline.md  早期 W600 AT 模块实测与基线记录
 logo.bin                  本地开机图片素材，不进入仓库
 ```
@@ -45,6 +45,9 @@ logo.bin                  本地开机图片素材，不进入仓库
 - `w25qxx.c`：W25Q64/W25Q128 驱动；ID 走 GPIO bit-bang，长块读写优先
   20 MHz 主机 SPI DMA，失败自动回退
 - `logo.c`：从 TF 卡同步 `/logo.bin` 到 Flash `0x700000`，开机从 Flash 流式刷图
+- `sd_fs.c`：SD 卡 GPIO 位翻转 + FAT16/32 文件流，logo 和 Bad Apple 共用
+- `badapple.c`：从 TF 卡流式播放 1bpp 帧（RLE 或 raw），实时展开成 RGB565 刷屏
+- `ba_rle.c`：Bad Apple 的 LEB128 游程解码，纯 C，可单独在主机上测试
 - `xl9555.c`：LCD 电源、复位、DC、背光和按键扩展
 - `board_check.c` / `sd_diag.c`：板级和 SD 诊断固件
 
@@ -65,6 +68,9 @@ pwsh -File software/build-lcd.ps1 -Variant board
 
 # 只探测 Flash
 pwsh -File software/build-lcd.ps1 -Variant flashonly
+
+# TF 卡 Bad Apple 播放（根目录放 /BADAPPLE.BIN）
+pwsh -File software/build-lcd.ps1 -Variant badapple
 ```
 
 脚本会先把 `software/lcd` 复制到 `$SdkRoot/example/lcd`，再调用 SDK 的
@@ -75,8 +81,9 @@ pwsh -File software/build-lcd.ps1 -Variant flashonly
 
 | 镜像 | MD5 | 用途 |
 | --- | --- | --- |
-| `software/prebuilt/normal/lcd.fls` | `3cd0961b7398362a823e4fab066ce6fe` | 点屏 + Flash logo + 触摸演示 |
-| `software/prebuilt/board/lcd.fls` | `ba2b38e90f3bf648b971a1ce5956beb2` | 板级自检；会擦除 W25Q64 最后一个 4 KB 扇区 |
+| `software/prebuilt/normal/lcd.fls` | `1791c60b82ef57f549977b33b2b58be5` | 点屏 + Flash logo + 触摸演示 |
+| `software/prebuilt/board/lcd.fls` | `40599329128e30d0ccb35f0766beda27` | 板级自检；会擦除 W25Q64 最后一个 4 KB 扇区 |
+| `software/prebuilt/badapple/lcd.fls` | `37d9c99c9a29b558624ee2ace29a5a39` | TF 卡 `/BADAPPLE.BIN` 播放（RLE 或 raw） |
 
 ## 开机流程
 
@@ -84,7 +91,8 @@ pwsh -File software/build-lcd.ps1 -Variant flashonly
 2. `w25qxx_init()` 探测外部 Flash
 3. 若 TF 卡有 `/logo.bin`，与 Flash 内容比较；不同则擦写并回读校验
 4. 从 Flash `0x700000` 流式读取 logo 并送屏，不需要整幅图进 RAM
-5. 进入触摸画板演示
+5. `badapple` 变体：循环播放 TF 卡 `/BADAPPLE.BIN`，按键后继续
+6. 进入触摸画板演示
 
 ## 说明
 

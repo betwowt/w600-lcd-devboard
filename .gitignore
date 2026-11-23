@@ -19,3 +19,7 @@ software/build-lcd.ps1.tmp
 *.lnp
 *.dep
 *.lck
+
+BADAPPLE.BIN
+badapple.bin
+BADAPPLE_*.BIN

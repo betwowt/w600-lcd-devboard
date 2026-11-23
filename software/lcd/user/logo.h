@@ -23,7 +23,4 @@
 int lcd_logo_load(void);
 int lcd_logo_display(void);
 
-/* Initialize the card and mount FAT; msg gets "FAT32 150000KB" etc. */
-int sd_card_probe(char *msg, u32 msg_len);
-
 #endif /* LCD_LOGO_H */

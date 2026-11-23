@@ -21,6 +21,9 @@
 #include "drivers_test.h"
 #include "spi_bus.h"
 #include "w25qxx.h"
+#ifdef BAD_APPLE
+#include "badapple.h"
+#endif
 #ifdef BOARD_CHECK
 #include "board_check.h"
 #endif
@@ -127,6 +130,11 @@ static void lcd_demo_task(void *arg)
     if (has_logo)
         lcd_logo_display();
     DELAY_MS(3000);
+#endif
+
+#ifdef BAD_APPLE
+    /* Streams /BADAPPLE.BIN until a key is pressed, then falls through. */
+    (void)badapple_run();
 #endif
 
 #if !defined(LCD_TEST) && !defined(DRIVER_TEST) && !defined(BOARD_CHECK)

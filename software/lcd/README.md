@@ -85,6 +85,141 @@ VCC/WP/HOLD 网络都是 `+3.3V`；如果实装的是 3.3V 型号（`W25Q64JV/FV
 片选和 PB17 MISO；固件在探测前会先发 0xFF/0xAB/0x66+0x99 退出 QPI、
 释放掉电和软复位。
 
+## Bad Apple 播放（TF 卡实时流）
+
+固件变体 `badapple` 在开机 logo 之后自动播放 TF 卡根目录的
+`/BADAPPLE.BIN`，循环播放，按板上任意按键停止并进入触摸演示。
+
+```powershell
+pwsh -File software/build-lcd.ps1 -Variant badapple
+```
+
+### 生成 BIN
+
+`tools/bad_apple.py` 用 ffmpeg 解码视频，按硬阈值（默认）或 8x8 Bayer
+有序抖动压成 1bpp，默认 240x180、12fps、屏幕居中（`y=70`）。默认输出
+**RLE** 帧流（`flags=1`）；`--raw` 输出旧的无压缩固定帧。
+
+Bad Apple 推荐 `--dither none` + RLE：原片本来就是黑白，硬阈值不会引入
+有序抖动的棋盘噪点，RLE 才能把 240x180 压到平均约 0.6 KB/帧。同一段
+画面用 `--dither ordered` 时噪点会把 RLE 撑到 5-7 倍。
+
+```bash
+# 全画质：240x180、18fps、RLE
+python tools/bad_apple.py bad_apple.mp4 -o badapple.bin --fps 18 --dither none
+
+# 小尺寸高帧率备选
+python tools/bad_apple.py bad_apple.mp4 -o fast.bin --width 192 --height 144 --fps 24 --dither none
+python tools/bad_apple.py bad_apple.mp4 -o tiny.bin --width 160 --height 120 --fps 24 --dither none
+
+# 旧格式：无压缩、12fps，固件仍然能播
+python tools/bad_apple.py bad_apple.mp4 -o old.bin --raw --fps 12 --dither ordered
+```
+
+仓库根目录已生成：
+
+| 文件 | 尺寸 | fps | 格式 | 大小 | 平均流量 |
+| --- | --- | --- | --- | --- | --- |
+| `BADAPPLE.BIN` | 240x180 | 18 | RLE | 2.33 MB | 619 B/帧，10.9 KiB/s |
+| `BADAPPLE_FAST.BIN` | 192x144 | 24 | RLE | 2.34 MB | 466 B/帧，10.9 KiB/s |
+| `BADAPPLE_TINY.BIN` | 160x120 | 24 | RLE | 1.82 MB | 363 B/帧，8.5 KiB/s |
+| `BADAPPLE_RAW_240X180_12FPS.BIN` | 240x180 | 12 | raw | 14 MB | 5400 B/帧，63 KiB/s |
+
+直接复制要播的那个到 TF 卡并改名为 `BADAPPLE.BIN`（FAT 8.3 名：8 字符
+`BADAPPLE` + 扩展名 `BIN`）。当前固件只认这一个文件名。`--fps` 必须是
+整数，固件按 `configTICK_RATE_HZ=500` 计帧间隔。
+
+### 文件格式
+
+32 字节小端头 + 连续帧：
+
+| 偏移 | 类型 | 内容 |
+| --- | --- | --- |
+| 0 | char[8] | `"BADAPPL1"` |
+| 8 | u16 | 宽（8 的倍数，≤240） |
+| 10 | u16 | 高（≤320） |
+| 12 | u16 | 屏幕 x |
+| 14 | u16 | 屏幕 y |
+| 16 | u16 | fps |
+| 18 | u16 | flags：0=raw，1=RLE；其它位无效 |
+| 20 | u32 | 帧数 |
+| 24 | u32 | 未压缩帧字节数 `(宽/8)*高` |
+| 28 | u32 | 保留 |
+
+flags=0：每帧固定 `frame_bytes` 字节，行优先、每像素 1 bit、MSB 在左，
+1=白、0=黑。
+
+flags=1：每帧先是 u16 长度（小端），bit15=1 表示该帧仍是 raw，低 15 位是
+payload 字节数；否则 payload 是 LEB128 游程长度流，从黑色开始黑白交替，
+第一个游程为 0 表示首像素是白色，一直解码到 `宽*高` 个像素。RLE 编码器
+逐帧比较，payload 不小于 `frame_bytes` 时自动退回 raw（bit15）。
+
+`bad_apple.py` 会先写占位头，编码完再回填帧数和 flags。
+
+手上的 bin 如果是别家播放器的裸 1bpp 帧，需要按上表补头（flags=0）并改成
+`(宽/8)*高` 的行宽，不能直接改名使用。
+
+### 刷屏路径
+
+1. RLE 帧：先 `sd_file_read()` 读 2 B 长度，再读 payload；两次都是
+   独立的 SD 总线作业，payload 整块一次读完。raw 帧直接一次读进
+   `g_frame`。
+2. `ba_rle_decode()` 在播放任务里把游程流解成 1bpp 的 `g_frame`；
+   raw 帧跳过解码。
+3. `lcd_image_1bpp()` 把整个窗口的展开和刷屏合成 **一个** LCD 总线
+   作业：每个源字节查 256 项表展开成 8 个 RGB565 像素（16 B），累计
+   8 行发一次 `tls_spi_write()`。展开缓冲 3840 B。
+4. 按文件 fps 用 500 Hz tick 补睡眠；渲染跟不上时放弃补睡并重新对齐。
+
+串口每 10 秒打印一次：
+
+```
+BA: loop 0 frame 179, 18 fps, SD 8.1 ms, LCD 35.2 ms
+```
+
+`SD` 包含长度+payload 两次读取，`LCD` 包含 RLE 解码和 LCD 刷屏，都是
+10 秒平均（2 ms tick 分辨率）。240x180 的 LCD 数据固定是 86.4 KB，
+20 MHz 下约 35 ms，所以帧率上限约 28 fps。RLE 把 SD 侧从 5400 B/帧
+压到平均约 620 B/帧，即使卡停在 400 kHz 档也能喂 18 fps；`SD` 仍然
+很大时看启动日志的 `SD: data clock ...`。
+
+旧的 `--raw` bin 仍然支持（flags=0）：1 次 SD 读 + 1 次 LCD 写，
+240x180/12fps 需要约 63 KiB/s，卡慢时还是会掉帧。固件实测值以串口
+`BA: loop ... fps` 为准。
+
+### SD 读取加速
+
+`sd_fs.c` 从 `logo.c` 拆出，logo 和 Bad Apple 共用。为了让 TF 卡喂得动
+实时帧：
+
+- 位翻转直接写 W600 GPIO 数据寄存器（PA01/PB18/PB17，地址见
+  `wm_regs.h`），不再逐位走 `tls_gpio_write()` 的临界区；
+- 初始化后发 CMD59 打开数据块 CRC，读块后校验 CRC16；
+- 依次试 8 / 6 / 4 / 3 / 2 / 1 / 0.4 MHz，第一档连续 4 块校验通过即
+  采用；8 MHz 档实际是“不加延时循环”，GPIO 位翻转上限约 2 MHz，运行中
+  连续读失败会自动降档并打印日志。6/4/3 MHz 档用 2/4/8 次空转补
+  setup/hold，给较慢的卡和连线留中间档；
+- 逐字节写 PB 影子寄存器，不再每个 bit 读-改-写 `SD_PB_DATA`；MOSI
+  设置和 MISO 采样仍是直接 APB 访问；
+- 卡不支持 CMD59 时退回 400 kHz 且不校验，功能可用但帧率较低。
+
+SD 初始化、命令应答和 FAT 遍历逻辑保持不变，仍然只在 `spi_bus.c` 的
+SD 事务里碰总线。
+
+### 限制
+
+- 没有音频输出，只有画面。
+- 画面按 1bpp 黑白播放。默认 `--dither none` 硬阈值，RLE 压缩最好；
+  `--dither ordered` 保留灰度层次，但棋盘噪点会把 RLE 撑大 5-7 倍。
+- 全屏 240x320 也能放（`--height 320`），但 LCD 数据 153.6 KB，
+  20 MHz 下约 69 ms，帧率上限约 14 fps；这时瓶颈是 LCD，不是 TF 卡。
+
+本轮做了三件事：RLE 把 240x180 的 SD 流量从 5400 B/帧降到约 620 B/帧；
+每帧的 SD/LCD 总线作业从 34 次压到 2-3 次；SD 位翻转加了 6/4/3 MHz
+中间档。串口 10 秒一次的 `SD ... ms, LCD ... ms` 用来看剩余瓶颈。
+`BADAPPLE.BIN`（240x180、18fps）的 LCD 约 35 ms，SD 只要几毫秒；
+`BADAPPLE_FAST/TINY.BIN` 把 LCD 数据再减半，可以跑 24fps。
+
 ## 板载驱动
 
 `user/` 下新增三个独立驱动，均不依赖 LCD 演示状态：
@@ -172,10 +307,10 @@ make -f Makefile.mk APP_BIN_NAME=lcd TARGET=lcd COMPILE=gcc FLASH_SIZE=1M \
 切换 `EXTRA_CCFLAGS` 时必须先 `clean`，否则旧的 `.o` 会按默认模式复用，
 生成的 `lcd.fls` 可能仍是普通 LCD 演示。
 
-预编译镜像：`bin/lcd/lcd_board.fls`（MD5 `ba2b38e90f3bf648b971a1ce5956beb2`，本轮构建）。自检会擦除
+预编译镜像：`bin/lcd/lcd_board.fls`（MD5 `7c48490848fc18ccd9f2fbe90a9445a3`，本轮构建）。自检会擦除
 W25Q64 最后一个 4 KB 扇区（`0x7FF000`），不会碰固件区。
 
-普通点屏/Flash logo 镜像：`bin/lcd/lcd.fls`（MD5 `3cd0961b7398362a823e4fab066ce6fe`，本轮构建）。
+普通点屏/Flash logo 镜像：`bin/lcd/lcd.fls`（MD5 `d07cfe5d2a692725053977f7afe2839e`，本轮构建）。
 
 ## 验证状态
 

@@ -23,6 +23,9 @@
 static u8 fill_buf[4096];
 static u8 text_buf[2048];
 
+#define LCD_1BPP_ROWS 8u
+static u8 img_buf[LCD_W * 2u * LCD_1BPP_ROWS] __attribute__((aligned(4)));
+
 struct lcd_init_cmd {
     u8 cmd;
     u8 len;
@@ -330,6 +333,68 @@ void lcd_image_data(const u8 *buf, u32 len)
     struct lcd_image_data_arg a = {buf, len};
 
     (void)spi_bus_run(SPI_DEV_LCD, lcd_image_data_op, &a);
+}
+
+struct lcd_image_1bpp_arg {
+    u16 x, y, w, h, stride;
+    const u8 *bits;
+    const u32 *pix;
+};
+
+/*
+ * One bus job for the whole frame: set the window once, then expand and
+ * send LCD_1BPP_ROWS rows at a time.  Keeping this in a single transaction
+ * removes two queue/semaphore switches and an SPI re-setup per chunk.
+ */
+static int lcd_image_1bpp_op(void *arg)
+{
+    struct lcd_image_1bpp_arg *a = (struct lcd_image_1bpp_arg *)arg;
+    u32 row = 0;
+    u16 w = a->w;
+    u16 h = a->h;
+
+    if (!a->bits || !a->pix || w == 0 || h == 0 ||
+        (w & 7u) || a->stride != (u16)(w / 8u) ||
+        a->x >= LCD_W || a->y >= LCD_H ||
+        (u32)a->x + w > LCD_W || (u32)a->y + h > LCD_H)
+        return -1;
+
+    lcd_image_begin_locked(a->x, a->y, w, h);
+    while (row < h) {
+        u16 nr = (u16)(h - row);
+        u32 *out = (u32 *)img_buf;
+        u16 r;
+        u16 i;
+
+        if (nr > LCD_1BPP_ROWS)
+            nr = LCD_1BPP_ROWS;
+
+        for (r = 0; r < nr; r++) {
+            const u8 *src = a->bits + (row + r) * a->stride;
+
+            for (i = 0; i < a->stride; i++) {
+                const u32 *px = a->pix + (u32)src[i] * 4u;
+
+                out[0] = px[0];
+                out[1] = px[1];
+                out[2] = px[2];
+                out[3] = px[3];
+                out += 4;
+            }
+        }
+
+        lcd_image_data_locked(img_buf, (u32)nr * w * 2u);
+        row += nr;
+    }
+    return 0;
+}
+
+void lcd_image_1bpp(u16 x, u16 y, u16 w, u16 h, u16 stride,
+                    const u8 *bits, const u32 *pix_table)
+{
+    struct lcd_image_1bpp_arg a = {x, y, w, h, stride, bits, pix_table};
+
+    (void)spi_bus_run(SPI_DEV_LCD, lcd_image_1bpp_op, &a);
 }
 
 static void lcd_draw_pixel_locked(u16 x, u16 y, u16 color)

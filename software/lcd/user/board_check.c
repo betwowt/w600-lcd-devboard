@@ -10,7 +10,7 @@
 
 #include "board.h"
 #include "lcd.h"
-#include "logo.h"
+#include "sd_fs.h"
 #include "w25qxx.h"
 #include "board_check.h"
 #include "wm_wifi.h"

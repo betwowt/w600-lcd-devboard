@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$SdkRoot = $(if ($env:W600_SDK) { $env:W600_SDK } else { "F:/projects/w600-sdk" }),
-    [ValidateSet("normal", "board", "flashonly")]
+    [ValidateSet("normal", "board", "flashonly", "badapple")]
     [string]$Variant = "normal",
     [string]$Toolchain = ""
 )
@@ -36,6 +36,7 @@ $ExtraFlags = switch ($Variant) {
     "normal"    { "" }
     "board"     { "-DBOARD_CHECK -DSD_DIAG" }
     "flashonly" { "-DFLASH_ONLY" }
+    "badapple"  { "-DBAD_APPLE" }
 }
 
 $MakeArgs = @(

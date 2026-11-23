@@ -46,6 +46,13 @@ int lcd_spi_resume(void);
 void lcd_fill(u16 x0, u16 y0, u16 x1, u16 y1, u16 color);
 void lcd_image_begin(u16 x, u16 y, u16 w, u16 h);
 void lcd_image_data(const u8 *buf, u32 len);
+
+/*
+ * Stream a 1-bpp image in one bus transaction.  pix_table[256][4] expands
+ * one source byte (8 pixels, MSB first) into 16 RGB565 bytes.
+ */
+void lcd_image_1bpp(u16 x, u16 y, u16 w, u16 h, u16 stride,
+                    const u8 *bits, const u32 *pix_table);
 void lcd_draw_pixel(u16 x, u16 y, u16 color);
 void lcd_draw_hline(u16 x0, u16 x1, u16 y, u16 color);
 void lcd_draw_vline(u16 x, u16 y0, u16 y1, u16 color);
