@@ -3,6 +3,10 @@
 W600（WinnerMicro）模组开发板 + ILI9341 240x320 SPI 屏的点屏、触摸和 Flash logo
 工程。仓库同时保留这块板子的 KiCad 原理图、PCB、Gerber、BOM 和 3D 模型。
 
+<p align="center">
+  <img src="docs/images/board.jpg" alt="W600 LCD DevBoard" width="420">
+</p>
+
 建议仓库名：**`w600-lcd-devboard`**。
 
 ## 目录
