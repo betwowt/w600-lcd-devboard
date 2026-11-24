@@ -1,6 +1,6 @@
 # W600 LCD DevBoard
 
-**两块钱的 W600 模组 + ILI9341 240×320 屏，做成一块能点屏、能触摸、能读卡、能存图的完整开源板。**
+**用两块钱的 W600 模组和一块 ILI9341 240×320 屏，做出一块能点屏、能触摸、能读卡、能存图的开源板。**
 硬件（KiCad / Gerber / BOM / 3D）、固件、构建脚本和实测记录都在这个仓库里。
 
 <p align="center">
@@ -11,32 +11,32 @@
 
 W600 是 WinnerMicro 2019 年的模组，逛某宝时两元一片，卖家说兼容 ESP8266。
 买回来实测发现：模块自带的 AT 固件是裁剪版，没有 HTTP / MQTT 专用 AT、
-没有 server 模式、没有 OTA，多轮 socket 开关后状态机还会残留（详见
+server 模式和 OTA，多轮 socket 开关后状态机还会残留（详见
 [`docs/W600-AT-baseline.md`](docs/W600-AT-baseline.md)）。
 
-既然 AT 不够用，就基于 W600 SDK 自己写固件。于是有了这块板：把点屏需要的
-FPC、触摸、外部 Flash、TF 卡、按键、RGB 灯和 USB-C 串口一次性做齐，
+既然 AT 不够用，就基于 W600 SDK 自己写固件。于是有了这块板：把点屏要用的
+FPC、触摸、外部 Flash、TF 卡，以及按键、RGB 灯和 USB-C 串口都做上，
 顺手把 LCD / Flash / SD 三设备共享 SPI 的坑也踩完了。
 
 ## 特性
 
-- **显示**：ILI9341 240×320 SPI，20 MHz 主机 SPI，硬件刷屏 + 1bpp 快速展开
+- **显示**：ILI9341 240×320 SPI，20 MHz 硬件 SPI 刷屏，1bpp 图像快速展开
 - **触摸**：FT6236 / CST816 自动探测，I2C 轮询，支持画板演示
 - **存储**：板载 W25Q64（8 MB）+ TF 卡，FAT16/32 文件流
 - **开机 logo**：TF 卡 `/logo.bin` 同步到 Flash，之后从 Flash 流式刷屏
-- **Bad Apple**：TF 卡实时播放 1bpp 视频，RLE 压缩，240×180 实测 18 fps
+- **Bad Apple**：TF 卡实时播放 1bpp 帧流，RLE 压缩，240×180 实测 18 fps
 - **交互**：4 个用户按键 + 共阳 RGB 灯，全部挂在 XL9555 上
-- **自检**：LCD / Flash / TF / Wi-Fi 整板自检固件，失败项有串口定位日志
+- **自检**：一块固件检查 LCD、Flash、TF 卡和 Wi-Fi，失败时串口打印具体阶段
 - **共享总线**：LCD / Flash / SD 共用 SPI，单总线任务 + CS 互锁，不会互相踩
-- **全开源**：原理图、PCB、Gerber、BOM、LCSC 库、3D 模型、固件源码齐全
+- **全开源**：原理图、PCB、Gerber、BOM、LCSC 库、3D 模型和固件源码都在仓库里
 
 ## 硬件
 
 | 项目 | 规格 |
 | --- | --- |
-| MCU | WinnerMicro W600（TW-03），Cortex-M3 @ 80 MHz |
-| 存储 | 1 MB Flash / 288 KB SRAM，2.4 GHz 802.11 b/g/n |
-| 模组封装 | ESP-12F 兼容，可直接替换同封装模块 |
+| MCU | WinnerMicro W600（TW-03），Cortex-M3 @ 80 MHz，2.4 GHz 802.11 b/g/n |
+| 存储 | 1 MB Flash / 288 KB SRAM |
+| 模组封装 | ESP-12F 兼容封装 |
 | 屏幕 | ILI9341 240×320，16Pin 0.5 mm FPC，SPI，无 MISO |
 | 触摸 | FT6236 / CST816，I2C，TP_INT 可选 |
 | 外部 Flash | W25Q64，8 MB，SPI NOR |
@@ -122,7 +122,7 @@ flowchart LR
 | `software/prebuilt/board/lcd.fls` | `40599329128e30d0ccb35f0766beda27` | 整板自检；会擦除 W25Q64 最后一个 4 KB 扇区 |
 | `software/prebuilt/badapple/lcd.fls` | `37d9c99c9a29b558624ee2ace29a5a39` | 播放 TF 卡 `/BADAPPLE.BIN` |
 
-W600 进 secboot 需要在上电/复位时拉低 boot 脚，串口出现 `CCC...` 后才能写。
+W600 要进 secboot，得在上电或复位时拉低 boot 脚；串口出现 `CCC...` 后才能烧录。
 板上 CH340N 没有 DTR/RTS，**不能自动复位进下载模式**，需要手动操作；
 烧录前先关掉串口助手，避免 COM 口被独占。
 
@@ -174,14 +174,14 @@ FAT32、MBR 分区，文件名用 8.3 格式：
 "LOGO" | u16 w | u16 h | u16 fmt=1 | u16 reserved | u32 data_size | u32 reserved
 ```
 
-有卡时固件会比较 TF 与 Flash 内容，不同才擦写，避免反复磨损；没有卡或
+有卡时固件会比较 TF 卡和 Flash 里的内容，不同才擦写，避免反复磨损；没有卡或
 没有文件就直接用 Flash 里已有的 logo。
 
 ### 4. 首次上电
 
-1. 插好 16Pin FPC，USB-C 供电，串口 **115200 8N1** 打开
+1. 插好 16Pin FPC，USB-C 供电，串口按 **115200 8N1** 打开
 2. 启动日志会打印 XL9555 探测、Flash JEDEC ID、SD 初始化和 logo 同步结果
-3. 屏幕先显示 logo 3 秒，然后进入彩条 + 触摸画板演示
+3. 开机先显示 logo 3 秒，然后进入彩条 + 触摸画板演示
 4. `badapple` 变体在 logo 后循环播放，按任意用户键停止并进入触摸演示
 
 ## 固件变体
@@ -194,7 +194,7 @@ FAT32、MBR 分区，文件名用 8.3 格式：
 | `badapple` | `-DBAD_APPLE` | 播放 TF 卡 `/BADAPPLE.BIN` |
 | `overclock` | `-DOC_TEST` | 80/40/80/160 MHz 负载对比，160 MHz 会挂死 |
 
-`overclock` 镜像不预置，需要本地构建。实测 40 MHz 耗时约为 80 MHz 的
+`overclock` 镜像不预置，需要本地构建。实测 40 MHz 下各项耗时约为 80 MHz 的
 2.0 倍，80 MHz 重跑误差 <0.3%；160 MHz 切换后串口无输出、板子挂死，
 按复位键并重刷 `normal` 即可恢复。W600 标称 80 MHz，没有可用的中间档位。
 
@@ -213,9 +213,9 @@ FAT32、MBR 分区，文件名用 8.3 格式：
 20 MHz 主机 SPI DMA，失败自动回退。logo 固定放在 `0x700000`，占 256 KB；
 `0x7FF000` 留给板级自检擦写，不会碰固件区。
 
-这块板的 W600 主机 SPI 读 Flash 在所有 mode 下都返回 `FF`，所以 ID 和
-状态寄存器必须走 bit-bang；LCD 仍然用主机 SPI。两者切换由
-`lcd_spi_resume()` 恢复 Mode 0。
+这块板的 W600 主机 SPI 读 Flash 在所有模式下都返回 `FF`，所以 ID 和
+状态寄存器必须走 bit-bang；LCD 仍然用主机 SPI。每次切换后由
+`lcd_spi_resume()` 把总线恢复成 Mode 0。
 
 ### Bad Apple
 
@@ -297,7 +297,7 @@ docs/images/board.jpg     实物图
 | 10 小时长跑 | 3621 轮，MQTT 回环 99.97%，HTTP 120/120 |
 
 **瓶颈是 921600 UART，不是 Wi-Fi。** 要更高吞吐只能用 W600 SDK 自己写
-TCP/UDP，或者换 ESP32。AT 固件没有源码、没有 secboot 通道，socket
+TCP/UDP，或者换 ESP32。AT 固件没有源码，也没有 secboot 通道；socket
 状态机残留只能靠主机侧重连规避。
 
 ## 常见问题
@@ -354,8 +354,8 @@ LCD，Flash/SD 的 bit-bang 时序由 `spi_bus` 统一调度。
 
 - W600 SDK 3.4.0（官方）+ `arm-none-eabi-gcc` 7-2017q4
 - 器件数据手册随 LCSC 库放在 `hardware/.../easyeda_convertlib.datasheet/`
-- W600 的公开资料比较零散，仓库里能公开的部分已经整理进 `docs/`；
-  其余 SDK、AT 固件和手册在交流群文件里
+- W600 的公开资料比较零散，仓库里整理了一部分，放在 `docs/`；其余 SDK、
+  AT 固件和手册在交流群文件里
 - 有问题欢迎开 Issue，带上串口日志和板上丝印/版本
 
 ## 说明
